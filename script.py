@@ -7,11 +7,10 @@ Licence : GPL
 
 from csv import reader
 from gi.repository import Gtk
-from os import environ, geteuid, getlogin, listdir, path, makedirs, chown, getenv, symlink, remove
+from os import geteuid, getlogin, listdir, path, chown, getenv, remove
 from subprocess import Popen, PIPE, call
 from sys import exit
-from shutil import rmtree, copyfile, move
-from hashlib import md5
+from shutil import copyfile, move
 try:
     from cairosvg import svg2png
 except ImportError:

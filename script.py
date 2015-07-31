@@ -152,10 +152,11 @@ def install():
         for app in apps:
             app_icons = apps[app]["icons"]
             for icon in app_icons:
+                icon_size = icon[2]
                 if isinstance(icon, list):
                     icon = [item.strip() for item in icon] 
                     base_icon = path.splitext(icon[0])[0]
-                    if theme.lookup_icon(base_icon, default_icon_size, 0):
+                    if theme.lookup_icon(base_icon, icon_size, 0):
                         repl_icon = symlink_icon = icon[0]
                     else:
                         symlink_icon = icon[0]  #Hardcoded icon to be replaced
@@ -164,7 +165,7 @@ def install():
                     symlink_icon = repl_icon = icon.strip()
                 base_icon = path.splitext(repl_icon)[0]
                 extension_orig = path.splitext(symlink_icon)[1]
-                theme_icon = theme.lookup_icon(base_icon, default_icon_size, 0)
+                theme_icon = theme.lookup_icon(base_icon, icon_size, 0)
                 if theme_icon:
                     filename = theme_icon.get_filename()
                     extension_theme = path.splitext(filename)[1]
@@ -214,9 +215,6 @@ def install():
                                 print("fixing %s failed with error:\n%s"%(app, err))
     else:
         exit("No apps to fix! Please report on GitHub if this is not the case")
-
-if detect_de() in ("pantheon", "xfce"):
-    default_icon_size = 24
 
 print("Welcome to the tray icons hardcoder fixer! \n")
 print("1 - Install \n")

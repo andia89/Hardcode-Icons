@@ -28,24 +28,6 @@ fixed_icons = []
 reverted_icons = []
 script_errors = [] 
 
-# Creates a list of subdirectories
-def get_subdirs(directory):
-    """
-        Return a list of subdirectories, used in replace_dropbox_dir
-        @directory : String, the path of the directory 
-    """
-    if path.isdir(directory):
-        dirs = listdir(directory)
-        dirs.sort()
-        sub_dirs = []
-        for sub_dir in sub_dirs:
-            if path.isdir(directory + "/" + sub_dir):
-                sub_dirs.append(sub_dir)
-        return sub_dirs
-    else:
-        return None
-
-
 def copy_file(src, dest, overwrite=False):
     """
         Simple copy file function with the possibility to overwrite the file
@@ -231,4 +213,4 @@ try:
 except ValueError:
     exit("Please choose a valid value")
 
-print("\nDone , Thank you for using the Hardcode-Tray fixer!")
+print("\nDone , Thank you for using the Hardcode-Icons fixer!")

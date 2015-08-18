@@ -11,6 +11,7 @@ from os import geteuid, getlogin, listdir, path, chown, getenv, remove
 from subprocess import Popen, PIPE, call
 from sys import exit
 from shutil import copyfile, move
+from collections import OrderedDict
 try:
     from cairosvg import svg2png
 except ImportError:
@@ -20,20 +21,20 @@ if geteuid() != 0:
     exit("You need to have root privileges to run this script.\nPlease try again, this time using 'sudo'. Exiting.")
 
 db_file = "db.csv"
-db_folder = "database"
+db_folder = "database/"
 userhome = path.expanduser("~" + getlogin())
 theme = Gtk.IconTheme.get_default()
 
 fixed_icons = []
 reverted_icons = []
-script_errors = [] 
+script_errors = []
 
 def copy_file(src, dest, overwrite=False):
     """
         Simple copy file function with the possibility to overwrite the file
         @src : String, the source file
-        @dest : String, the destination folder 
-        @overwrite : Boolean, to overwrite the file 
+        @dest : String, the destination folder
+        @overwrite : Boolean, to overwrite the file
     """
     if overwrite:
         if path.isfile(dest):
@@ -46,11 +47,11 @@ def copy_file(src, dest, overwrite=False):
 
 def get_app_icons(app_name):
     """
-        get a list of icons in /database/applicationname of each application 
+        get a list of icons in /database/applicationname of each application
         @app_name : String, the application name
     """
-    if path.isfile(db_folder + "/" + app_name):
-        f = open(db_folder + "/" + app_name)
+    if path.isfile(db_folder + app_name):
+        f = open(db_folder + app_name)
         r = reader(f, skipinitialspace=True)
         icons = []
         for icon in r:
@@ -63,7 +64,7 @@ def get_app_icons(app_name):
         return icons
     else:
         print("The application " + app_name + " does not exist yet, please report this on GitHub")
-        return None
+
 
 def get_apps_informations():
     """
@@ -71,14 +72,20 @@ def get_apps_informations():
     """
     db = open(db_file)
     r = reader(db, skipinitialspace=True)
-    apps = {}
+    next(r)
+    apps = OrderedDict()
     for app in r:
-        app[1] = app[1].replace("{userhome}", userhome).strip()
-        if app[1]:
-            if path.isdir(app[1] + "/"):
-                icons = get_app_icons(app[0])
+        print(app)
+        app[2] = app[2].replace("{userhome}", userhome).strip()
+        if app[2]:
+            if path.isdir(app[2]):
+                icons = get_app_icons(app[1])
+                apps[app[1]] = {}
                 if icons:
-                        apps[app[0]] = {"path": app[1], "icons": icons}
+                    apps[app[1]]["name"]   = app[0]
+                    apps[app[1]]["path"]   = app[2]
+                    apps[app[1]]["icons"]  = icons
+                    apps[app[1]]["dbfile"] = app[1]
                 else:
                     continue
         else:
@@ -90,8 +97,8 @@ def get_apps_informations():
 def backup(icon, revert=False):
     """
         A backup fonction, used to make reverting to the original icons possible
-        @icon : String, the original icon name 
-        @revert : Boolean, possibility to revert the icons later 
+        @icon : String, the original icon name
+        @revert : Boolean, possibility to revert the icons later
     """
     back_file = icon + ".bak"
     if path.isfile(icon):
@@ -109,106 +116,99 @@ def reinstall():
     if len(apps) != 0:
         for app in apps:
             app_icons = apps[app]["icons"]
-            folder = apps[app]["path"]
+            app_path = apps[app]["path"]
             for icon in app_icons:
                 if isinstance(icon, list):
                         revert_icon = icon[0]  #Hardcoded icon to be reverted
                 else:
                     revert_icon = icon.strip()
                     try:
-                        backup(folder + "/" + revert_icon, revert=True)
+                        backup(app_path + revert_icon, revert=True)
                     except:
                         continue
                     if not revert_icon in reverted_icons:
                         print("%s -- reverted" % (revert_icon))
                         reverted_icons.append(revert_icon)
-                    
-        
+
+
 def install():
     """
-        Installing the new supported icons 
+        Installing the new supported icons
     """
     apps = get_apps_informations()
     if len(apps) != 0:
         for app in apps:
             app_icons = apps[app]["icons"]
+            app_path  = apps[app]["path"]
             for icon in app_icons:
                 icon_size = icon[2]
                 if isinstance(icon, list):
-                    icon = [item.strip() for item in icon] 
+                    icon = [item.strip() for item in icon]
                     base_icon = path.splitext(icon[0])[0]
-                    if theme.lookup_icon(base_icon, icon_size, 0):
+                    if theme.lookup_icon(base_icon, int(icon_size), 0):
                         repl_icon = symlink_icon = icon[0]
                     else:
-                        symlink_icon = icon[0]  #Hardcoded icon to be replaced
-                        repl_icon = icon[1]  #Theme Icon that will replace hardcoded icon
+                        symlink_icon = icon[0]
+                        repl_icon = icon[1]
                 else:
                     symlink_icon = repl_icon = icon.strip()
                 base_icon = path.splitext(repl_icon)[0]
                 extension_orig = path.splitext(symlink_icon)[1]
-                theme_icon = theme.lookup_icon(base_icon, icon_size, 0)
+                theme_icon = theme.lookup_icon(base_icon, int(icon_size), 0)
                 if theme_icon:
                     filename = theme_icon.get_filename()
                     extension_theme = path.splitext(filename)[1]
-                     #catching the unrealistic case that theme is neither svg nor png
+                    #catching the unrealistic case that theme is neither svg nor png
                     if extension_theme not in (".png", ".svg"):
                         exit("Theme icons need to be svg or png files other formats are not supported")
-                    if not script:
-                        if symlink_icon:
-                            output_icon = apps[app]["path"] + "/" + symlink_icon
-                        else:
-                            output_icon = apps[app]["path"] + "/" + repl_icon
-                        backup(output_icon)
-                        if extension_theme == extension_orig:
-                            Popen(["ln", "-sf", filename, output_icon])
-                            print("%s -- fixed using %s" % (app, filename))
-                        elif extension_theme == ".svg" and extension_orig == ".png":
-                            try:#Convert the svg file to a png one
-                                with open(filename, "r") as content_file:
-                                    svg = content_file.read()
-                                fout = open(output_icon, "wb")
-                                svg2png(bytestring=bytes(svg, "UTF-8"), write_to=fout)
-                                fout.close()
-                                chown(output_icon, int(getenv("SUDO_UID")), int(getenv("SUDO_GID")))
-                            except:
-                                print("The svg file `" + filename + "` is invalid.")
-                                continue
-                            #to avoid identical messages
-                            if not (filename in fixed_icons):
-                                print("%s -- fixed using %s" % (app, filename))
-                                fixed_icons.append(filename)
-                        elif extension_theme == ".png" and extension_orig == ".svg":
-                            print("Theme icon is png and hardcoded icon is svg. There is nothing we can do about that :(")
+                    if symlink_icon:
+                        output_icon = apps[app]["path"] + symlink_icon
+                    else:
+                        output_icon = apps[app]["path"] + repl_icon
+                    backup(output_icon)
+                    if extension_theme == extension_orig:
+                        Popen(["ln", "-sf", filename, output_icon])
+                        print("%s -- fixed using %s" % (app, filename))
+                    elif extension_theme == ".svg" and extension_orig == ".png":
+                        try:#Convert the svg file to a png one
+                            with open(filename, "r") as content_file:
+                                svg = content_file.read()
+                            fout = open(output_icon, "wb")
+                            svg2png(bytestring=bytes(svg, "UTF-8"), write_to=fout)
+                            fout.close()
+                            chown(output_icon, int(getenv("SUDO_UID")), int(getenv("SUDO_GID")))
+                        except:
+                            print("The svg file `" + filename + "` is invalid.")
                             continue
-                        else:
-                            print("Hardcoded file has to be svg or png. Other formats are not supported yet")
-                            continue
-                    #to avoid identical messages
-                    if not (filename in fixed_icons):
-                        if not err:
+                        #to avoid identical messages
+                        if not (filename in fixed_icons):
                             print("%s -- fixed using %s" % (app, filename))
                             fixed_icons.append(filename)
-                        else: 
-                            if not err in script_errors:
-                                script_errors.append(err)
-                                err = err.decode("utf-8")
-                                err = "\n".join(["\t" + e for e in err.split("\n")])
-                                print("fixing %s failed with error:\n%s"%(app, err))
+                    elif extension_theme == ".png" and extension_orig == ".svg":
+                        print("Theme icon is png and hardcoded icon is svg. There is nothing we can do about that :(")
+                        continue
+                    else:
+                        print("Hardcoded file has to be svg or png. Other formats are not supported yet")
+                        continue
+                    #to avoid identical messages
+                    if not (filename in fixed_icons):
+                            print("%s -- fixed using %s" % (app, filename))
+                            fixed_icons.append(filename)
     else:
         exit("No apps to fix! Please report on GitHub if this is not the case")
 
-print("Welcome to the tray icons hardcoder fixer! \n")
-print("1 - Install \n")
-print("2 - Reinstall \n")
+print("Welcome to the applications hardcoded icons fixer!")
+print("1 - Install")
+print("2 - Reinstall")
 try:
     choice  = int(input("Please choose: "))
     if choice == 1:
         print("Installing now..\n")
-        install() 
+        install()
     elif choice == 2:
         print("Reinstalling now..\n")
         reinstall()
-    else:   
+    else:
         exit("Please try again")
 except ValueError:
     exit("Please choose a valid value")

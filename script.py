@@ -75,7 +75,6 @@ def get_apps_informations():
     next(r)
     apps = OrderedDict()
     for app in r:
-        print(app)
         app[2] = app[2].replace("{userhome}", userhome).strip()
         if app[2]:
             if path.isdir(app[2]):
@@ -140,6 +139,7 @@ def install():
         for app in apps:
             app_icons = apps[app]["icons"]
             app_path  = apps[app]["path"]
+            app_name  = apps[app]["name"]
             for icon in app_icons:
                 icon_size = icon[2]
                 icon = [item.strip() for item in icon]
@@ -165,7 +165,7 @@ def install():
                     backup(output_icon)
                     if extension_theme == extension_orig:
                         Popen(["ln", "-sf", filename, output_icon])
-                        print("%s -- fixed using %s" % (app, filename))
+                        print("%s -- fixed using %s" % (app_name, path.basename(filename)))
                     elif extension_theme == ".svg" and extension_orig == ".png":
                         try:#Convert the svg file to a png one
                             with open(filename, "r") as content_file:
@@ -179,7 +179,7 @@ def install():
                             continue
                         #to avoid identical messages
                         if not (filename in fixed_icons):
-                            print("%s -- fixed using %s" % (app, filename))
+                            print("%s -- fixed using %s" % (app_name, path.basename(filename)))
                             fixed_icons.append(filename)
                     elif extension_theme == ".png" and extension_orig == ".svg":
                         print("Theme icon is png and hardcoded icon is svg. There is nothing we can do about that :(")
@@ -189,7 +189,7 @@ def install():
                         continue
                     #to avoid identical messages
                     if not (filename in fixed_icons):
-                            print("%s -- fixed using %s" % (app, filename))
+                            print("%s -- fixed using %s" % (app_name, path.basename(filename)))
                             fixed_icons.append(filename)
     else:
         exit("No apps to fix! Please report on GitHub if this is not the case")

@@ -80,7 +80,7 @@ def get_apps_informations():
         if app[2]:
             if path.isdir(app[2]):
                 icons = get_app_icons(app[1])
-                apps[app[1]] = {}
+                apps[app[1]] = OrderedDict()
                 if icons:
                     apps[app[1]]["name"]   = app[0]
                     apps[app[1]]["path"]   = app[2]
@@ -142,19 +142,16 @@ def install():
             app_path  = apps[app]["path"]
             for icon in app_icons:
                 icon_size = icon[2]
-                if isinstance(icon, list):
-                    icon = [item.strip() for item in icon]
-                    base_icon = path.splitext(icon[0])[0]
-                    if theme.lookup_icon(base_icon, int(icon_size), 0):
-                        repl_icon = symlink_icon = icon[0]
-                    else:
-                        symlink_icon = icon[0]
-                        repl_icon = icon[1]
+                icon = [item.strip() for item in icon]
+                base_icon = path.splitext(icon[0])[0]
+                if theme.lookup_icon(path.basename(base_icon), int(icon_size), 0):
+                    repl_icon = symlink_icon = icon[0]
                 else:
-                    symlink_icon = repl_icon = icon.strip()
+                    symlink_icon = icon[0]
+                    repl_icon = icon[1]
                 base_icon = path.splitext(repl_icon)[0]
                 extension_orig = path.splitext(symlink_icon)[1]
-                theme_icon = theme.lookup_icon(base_icon, int(icon_size), 0)
+                theme_icon = theme.lookup_icon(path.basename(base_icon), int(icon_size), 0)
                 if theme_icon:
                     filename = theme_icon.get_filename()
                     extension_theme = path.splitext(filename)[1]

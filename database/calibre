@@ -14,14 +14,14 @@ chapters.png, , 128
 character-set.png, , 128
 clear_left.png, , 128
 column.png, , 128
-config.png, , 128
+config.png, config, 128
 connect_share.png, , 128
 connect_share_on.png, , 128
 console.png, , 128
 convert.png, , 128
 cover_flow.png, , 128
 cover_texture.png, , 128
-debug.png, , 128
+debug.png,system-run , 128
 default_cover.png, , 128
 dialog_error.png, dialog-error, 128
 dialog_information.png, dialog-information, 128
@@ -44,7 +44,7 @@ edit-copy.png, edit-copy, 128
 edit-cut.png, edit-cut, 128
 edit-paste.png, edit-paste, 128
 edit-redo.png, edit-redo, 128
-edit-select-all.png, , 128
+edit-select-all.png, edit-select-all, 128
 edit-undo.png, edit-undo, 128
 edit_input.png, , 128
 eject.png, , 128
@@ -75,20 +75,20 @@ format-text-underline.png, format-text-underline, 128
 forward.png, go-next, 128
 gmail_logo.png, , 128
 grid.png, , 128
-help.png, , 128
+help.png, help-about , 128
 heuristics.png, , 128
 highlight_only_off.png, , 128
 highlight_only_on.png, , 128
 hotmail.png, , 128
 html-fix.png, , 128
-icon_choose.png, , 128
+icon_choose.png, insert-image, 128
 identifiers.png, , 128
-insert-link.png, , 128
+insert-link.png, insert-link, 128
 jobs.png, , 128
 keyboard-prefs.png, , 128
 languages.png, , 128
 library.png, , 128
-list_remove.png, , 128
+list_remove.png, list-remove , 128
 lookfeel.png, , 128
 lt.png, , 128
 mail.png, , 128
@@ -111,8 +111,8 @@ plus.png, list-add, 128
 plusplus.png, , 128
 polish.png, , 128
 previous.png, go-previous, 128
-print-preview.png, , 128
-print.png, , 128
+print-preview.png, gtk-print-preview, 128
+print.png, gtk-print, 128
 publisher.png, , 128
 random.png, , 128
 rating.png, starred, 128
@@ -123,7 +123,7 @@ save.png, document-save, 128
 scheduler.png, , 128
 scroll.png, , 128
 sd.png, , 128
-search.png, , 128
+search.png, gtk-search, 128
 search_add_saved.png, , 128
 search_copy_saved.png, , 128
 search_delete_saved.png, , 128
@@ -186,7 +186,7 @@ mimetypes/snb.png, , 128
 mimetypes/svg.png, svg, 128
 mimetypes/tpz.png, , 128
 mimetypes/txt.png, txt, 128
-mimetypes/unknown.png, , 128
+mimetypes/unknown.png, unknown, 128
 mimetypes/xps.png, , 128
 mimetypes/zero.png, , 128
 mimetypes/zip.png, zip, 128

@@ -182,8 +182,8 @@ mimetypes/pdf.png, application-pdf.svg, 128
 mimetypes/png.png, image-png, 128
 mimetypes/rar.png, rar, 128
 mimetypes/rtf.png, text-rtf, 128
-mimetypes/snb.png, svg, 128
-mimetypes/svg.png, , 128
+mimetypes/snb.png, , 128
+mimetypes/svg.png, svg, 128
 mimetypes/tpz.png, , 128
 mimetypes/txt.png, txt, 128
 mimetypes/unknown.png, , 128

@@ -1,0 +1,162 @@
+17_32x32.png
+accessories-text-editor.png, , 32
+accounts.png, , 32
+applications-internet.png, , 32
+applications-system.png, , 32
+appointment-new.png, , 32
+bad.png, , 32
+button_languages.png, , 24
+clipboard_dis.png, , 32
+clipboard_en.png, , 32
+close.png
+contact-new.png, , 32
+cursor/help.png
+dialog-error.png, , 32
+dialog-information.png, , 32
+dialog-warning.png, , 32
+disabled.png, , 16
+document-new.png, , 32
+document-offline.png, , 32
+document-open_error.png, , 32
+document-open.png, , 32
+document-save.png, , 32
+drive-removable-media.png, , 32
+edit-clear.png, , 32
+edit-copy.png, , 32
+edit-cut.png, , 32
+edit-delete.png, , 32
+edit-find.png, , 32
+edit-find-replace.png, , 32
+edit-paste.png, , 32
+edit_redo.png, , 32
+edit-redo.png, , 32
+edit-select-all.png, , 32
+edit-undo.png, , 32
+emblem-unreadable.png, , 32
+enabled.png, , 16
+enlarge_bottom.png
+enlarge_left.png
+enlarge_right.png
+enlarge_top.png
+enlarge_vertical.png
+face-sad.png, , 32, , 32
+face-smile.png, , 32
+filter.png, , 32
+flashgot.png, , 16
+folder-_add_package.png, , 32
+folder-new.png, , 32
+folder-open_add.png, , 32
+folder-open.png, , 32
+folder.png, , 32
+folder-remote.png, , 32
+folder-visiting_add.png, , 32
+folder-visiting.png, , 32
+font-x-generic.png, , 32
+format-text-italic.png, , 32
+forward.png, , 32
+go-bottom.png, , 32
+go-down.png, , 32
+go-first.png, , 32
+go-jump.png, , 32
+go-last.png, , 32
+go-next.png, , 32
+go-previous.png, , 32
+go-top.png, , 32
+go-up.png, , 32
+help-browser.png, , 32
+internet-group-chat.png, , 32
+internet-web-browser.png, , 32
+key.png, , 16
+language.png, , 32
+list-add.png, , 32
+list.png
+list-remove_disabled.png, , 32
+list-remove.png, , 32
+logomenu.png, , 32
+mail-attachment.png, , 32
+media-floppy.png, , 32
+media-playback-pause.png, , 32
+media-playback-start.png, , 32
+media-playback-stop.png, , 32
+merge.png, , 32
+mime/application-certificate.png, , 32
+mime/application-x-executable.png, , 32
+mime/audio-x-generic.png, , 32
+mime/font-x-generic.png, , 32
+mime/image-x-generic.png, , 32
+mime/package-x-generic.png, , 32
+mime/text-html.png, , 32
+mime/text-x-generic.png, , 32
+mime/text-x-generic-template.png, , 32
+mime/text-x-script.png, , 32
+mime/video-x-generic.png, , 32
+mime/x-office-address-book.png, , 32
+mime/x-office-calendar.png, , 32
+mime/x-office-document.png, , 32
+mime/x-office-document-template.png, , 32
+mime/x-office-drawing.png, , 32
+mime/x-office-drawing-template.png, , 32
+mime/x-office-presentation.png, , 32
+mime/x-office-presentation-template.png, , 32
+mime/x-office-spreadsheet.png, , 32
+mime/x-office-spreadsheet-template.png, , 32
+minimize_bottom.png
+minimize_left.png
+minimize_right.png
+minimize_top.png
+network-error.png, , 32
+network-idle.png, , 32
+network-server.png, , 32
+ok.png, , 32
+package-x-generic_close_failed_.png
+package-x-generic_close_failed.png
+package-x-generic_close_.png
+package-x-generic_close.png
+package-x-generic_failed_.png
+package-x-generic_failed.png
+package-x-generic_.png
+package-x-generic.png
+pause.png, , 32
+play.png, , 32
+play_smart.png, , 32
+preferences-desktop-assistive-technology.png, , 32
+preferences-desktop.png, , 32
+preferences-desktop-wallpaper.png, , 32
+preferences-system.png, , 32
+premium_disabled.png, , 32
+premium_enabled.png, , 32
+premium.png, , 32
+prio_0.png, , 32
+prio_-1.png, , 32
+prio_1.png, , 32
+prio_2.png, , 32
+prio_3.png, , 32
+process-stop.png, , 32
+reconnect_cfg.png, , 32
+reconnect_disabled.png, , 32
+reconnect_enabled.png, , 32
+reconnect_select.png, , 32
+record.png, , 32
+remove-all.png, , 32
+remove-dupes.png, , 32
+remove-failed.png, , 32
+remove-ok.png, , 32
+software-update-available.png, , 32
+sort.png, , 32
+stop_after_disabled_big.png, , 32
+stop_after_disabled_small.png, , 32
+stop_after_enabled_big.png, , 32
+stop_after_enabled_small.png, , 32
+stop.png, , 32
+system-file-manager.png, , 32
+system-log-out.png, , 32
+system-search-add.png, , 32
+system-search.png, , 32
+system-software-update.png, , 32
+user-home.png, , 32
+user-trash.png, , 32
+utilities-terminal.png, , 32
+view-refresh.png, , 32
+view-refresh-warning.png, , 32
+window-new.png, , 32
+x.png, , 16

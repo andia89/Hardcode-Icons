@@ -1,2 +1,3 @@
-Application Name, Database file, Path 
+Application Name, Database file, Path
 Calibre, calibre, /usr/share/calibre/images/
+JDownloader, jdownloader, {userhome}/.jdownloader/jd/img/default/

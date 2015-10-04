@@ -1,8 +1,8 @@
 17_32x32.png
-accessories-text-editor.png, , 32
+accessories-text-editor.png, accessories-text-editor, 32
 accounts.png, , 32
-applications-internet.png, , 32
-applications-system.png, , 32
+applications-internet.png, applications-internet, 32
+applications-system.png, applications-system, 32
 appointment-new.png, appointment-new, 32
 bad.png, , 32
 button_languages.png, , 24
@@ -51,7 +51,7 @@ folder.png, gnome-folder, 32
 folder-remote.png, folder-remote, 32
 folder-visiting_add.png, , 32
 folder-visiting.png, folder-visiting, 32
-font-x-generic.png, , 32
+font-x-generic.png, font-x-generic, 32
 format-text-italic.png, format-text-italic, 32
 forward.png, forward, 32
 go-bottom.png, go-bottom, 32
@@ -74,7 +74,7 @@ list-remove_disabled.png, , 32
 list-remove.png, list-remove, 32
 logomenu.png, , 32
 mail-attachment.png, , 32
-media-floppy.png, , 32
+media-floppy.png, media-floppy, 32
 media-playback-pause.png, media-playback-pause, 32
 media-playback-start.png, media-playback-start, 32
 media-playback-stop.png, media-playback-stop, 32
@@ -114,15 +114,15 @@ package-x-generic_close_.png
 package-x-generic_close.png
 package-x-generic_failed_.png
 package-x-generic_failed.png
-package-x-generic_.png
-package-x-generic.png
-pause.png, , 32
-play.png, , 32
+package-x-generic_.png, package-x-generic, 32
+package-x-generic.png, package-x-generic, 32
+pause.png, player_pause, 32
+play.png, player_play, 32
 play_smart.png, , 32
 preferences-desktop-assistive-technology.png, , 32
-preferences-desktop.png, , 32
+preferences-desktop.png, preferences-desktop, 32
 preferences-desktop-wallpaper.png, , 32
-preferences-system.png, , 32
+preferences-system.png, preferences-system, 32
 premium_disabled.png, , 32
 premium_enabled.png, , 32
 premium.png, , 32
@@ -158,5 +158,5 @@ user-trash.png, user-trash., 32
 utilities-terminal.png, , 32
 view-refresh.png, , 32
 view-refresh-warning.png, , 32
-window-new.png, , 32
+window-new.png, window-new, 32
 x.png, , 16

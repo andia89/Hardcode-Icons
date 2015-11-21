@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''
 Author : Bilal Elmoussaoui (bil.elmoussaoui@gmail.com) , Andreas Angerer
-Version : 0.1 Beta
+Version : 0.1
 Licence : GPL
 '''
 
@@ -32,9 +32,10 @@ script_errors = []
 def copy_file(src, dest, overwrite=False):
     """
         Simple copy file function with the possibility to overwrite the file
-        @src : String, the source file
-        @dest : String, the destination folder
-        @overwrite : Boolean, to overwrite the file
+        Args :
+            src(str) : source file
+            dest(str) : destination folder
+            overwrite(bool) : True to overwrite the file False by default
     """
     if overwrite:
         if path.isfile(dest):
@@ -47,8 +48,9 @@ def copy_file(src, dest, overwrite=False):
 
 def get_app_icons(app_name):
     """
-        get a list of icons in /database/applicationname of each application
-        @app_name : String, the application name
+        Gets a list of icons of each application
+        Args:
+            app_name(str): The application name
     """
     if path.isfile(db_folder + app_name):
         f = open(db_folder + app_name)
@@ -95,9 +97,10 @@ def get_apps_informations():
 
 def backup(icon, revert=False):
     """
-        A backup fonction, used to make reverting to the original icons possible
-        @icon : String, the original icon name
-        @revert : Boolean, possibility to revert the icons later
+        Backup functions, enables reverting
+        Args:
+            icon(str) : the original icon name
+            revert(bool) : True: revert, False: only backup
     """
     back_file = icon + ".bak"
     if path.isfile(icon):
@@ -144,12 +147,12 @@ def install():
                 icon_size = icon[2]
                 icon = [item.strip() for item in icon]
                 base_icon = path.splitext(icon[0])[0]
-                if theme.lookup_icon(path.basename(base_icon), int(icon_size), 0):
-                    repl_icon = symlink_icon = icon[0]
-                else:
-                    symlink_icon = icon[0]
+                symlink_icon = path.splitext(icon[1])[0]
+                if theme.lookup_icon(symlink_icon, int(icon_size), 0):
                     repl_icon = icon[1]
-                base_icon = path.splitext(repl_icon)[0]
+                    symlink_icon = icon[0]
+                else:
+                    repl_icon = symlink_icon = icon[0]
                 extension_orig = path.splitext(symlink_icon)[1]
                 theme_icon = theme.lookup_icon(path.basename(base_icon), int(icon_size), 0)
                 if theme_icon:

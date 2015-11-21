@@ -198,15 +198,15 @@ def install():
         exit("No apps to fix! Please report on GitHub if this is not the case")
 
 print("Welcome to the applications hardcoded icons fixer!")
-print("1 - Install")
-print("2 - Reinstall")
+print("1 - Apply")
+print("2 - Revert")
 try:
     choice  = int(input("Please choose: "))
     if choice == 1:
-        print("Installing now..\n")
+        print("Applying now..\n")
         install()
     elif choice == 2:
-        print("Reinstalling now..\n")
+        print("Reverting now..\n")
         reinstall()
     else:
         exit("Please try again")
